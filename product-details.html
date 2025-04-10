@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details - Our Bookshop</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="styles.css"/>
+
+  <style>
+    body, h1, h3, p {
+      color: #f5f5f5;
+    }
+
+    .text-muted {
+      color: #f5f5f5 !important;
+    }
+
+    .text-danger {
+      color: #e74c3c !important;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #book-detail-section {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .invisible-container {
+      background-color: transparent;
+      border: 2px solid #e74c3c;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 100%;
+    }
+
+    footer {
+      margin-top: auto;
+    }
+
+    header h1 {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      .invisible-container {
+        padding: 20px;
+      }
+
+      #book-detail-section .row {
+        flex-direction: column;
+      }
+
+      #book-detail-section img {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar with toggler -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="products.html">
+        <img src="ble.png" alt="Bookshop Logo" height="50">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <h1>BOOK DETAILS</h1>
+  </header>
+
+  <!-- Book Details Section -->
+  <div class="invisible-container" id="book-detail-section">
+    <!-- Book info will be dynamically injected -->
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center bg-dark text-white py-3 mt-4">
+    <p>&copy; 2025 Our Bookshop. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Book Detail Script -->
+  <script>
+    const books = [
+      { id: "hobbit", title: "The Hobbit", author: "J.R.R. Tolkien", price: "$12.99", image: "hobbit.png", description: "A fantastic tale of adventure..." },
+      { id: "harrypotter", title: "Harry Potter", author: "J.K. Rowling", price: "$15.99", image: "harrypotter.png", description: "A young wizard, Harry Potter..." },
+      { id: "nameofthewind", title: "The Name of the Wind", author: "Patrick Rothfuss", price: "$14.50", image: "TNOTW.png", description: "Kvothe recounts his life story..." },
+      { id: "dune", title: "Dune", author: "Frank Herbert", price: "$18.99", image: "dune.png", description: "On the desert planet Arrakis..." },
+      { id: "foundation", title: "Foundation", author: "Isaac Asimov", price: "$13.75", image: "foundation.png", description: "A brilliant mathematician..." },
+      { id: "martian", title: "The Martian", author: "Andy Weir", price: "$16.50", image: "martian.png", description: "Astronaut Mark Watney is stranded..." },
+      { id: "sherlock", title: "Sherlock Holmes", author: "Arthur Conan Doyle", price: "$11.99", image: "sherlockholmes.png", description: "Legendary detective Sherlock Holmes..." },
+      { id: "gonegirl", title: "Gone Girl", author: "Gillian Flynn", price: "$14.99", image: "gonegirl.png", description: "A thriller about a missing wife..." },
+      { id: "dragon", title: "The Girl with the Dragon Tattoo", author: "Stieg Larsson", price: "$12.50", image: "GWDT.png", description: "Journalist and hacker team up..." },
+      { id: "midnightlibrary", title: "The Midnight Library", author: "Matt Haig", price: "$17.99", image: "TML.png", description: "Nora Seed finds herself in a library..." },
+      { id: "atomic", title: "Atomic Habits", author: "James Clear", price: "$19.99", image: "atomics.png", description: "A guide to building better habits..." },
+      { id: "crawdads", title: "Where the Crawdads Sing", author: "Delia Owens", price: "$15.99", image: "WTCS.png", description: "Kya Clark is the 'Marsh Girl'..." }
+    ];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const bookId = urlParams.get("id");
+    const book = books.find(b => b.id === bookId);
+
+    if (book) {
+      const section = document.getElementById("book-detail-section");
+      section.innerHTML = `
+        <div class="row w-100 align-items-center justify-content-center">
+          <div class="col-md-5 text-center mb-4 mb-md-0">
+            <img src="${book.image}" class="img-fluid rounded shadow-lg" alt="${book.title}" style="max-height: 400px; object-fit: contain;">
+          </div>
+          <div class="col-md-6">
+            <h3>${book.title}</h3>
+            <p class="text-muted">by ${book.author}</p>
+            <p class="text-danger fw-bold">${book.price}</p>
+            <p>${book.description}</p>
+            <button class="btn btn-primary me-2" onclick="addToCart('${book.id}')">Add to Cart</button>
+            <button class="btn btn-success" onclick="buyNowFromProductDetailsPage()">Buy Now</button>
+          </div>
+        </div>
+      `;
+    } else {
+      alert("Book not found!");
+    }
+
+    function addToCart(bookId) {
+      const selectedBook = books.find(book => book.id === bookId);
+      if (selectedBook) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existingIndex = cart.findIndex(item => item.id === selectedBook.id);
+        if (existingIndex > -1) {
+          cart[existingIndex].quantity += 1;
+        } else {
+          selectedBook.quantity = 1;
+          cart.push(selectedBook);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${selectedBook.title} has been added to your cart!`);
+      }
+    }
+
+    function buyNowFromProductDetailsPage() {
+      alert("Thank you for purchasing!");
+      window.location.href = 'home.html';
+    }
+  </script>
+</body>
+</html>
